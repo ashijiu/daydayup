@@ -1,0 +1,852 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    position: relative;
+}
+
+/* 遮罩层 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+/* 弹窗样式 */
+.all-words-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 900px;
+    max-height: 80vh;
+    overflow: hidden;
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #2c3e50;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+    transition: color 0.3s ease;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    color: #e74c3c;
+    background-color: #f0f0f0;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: calc(80vh - 80px);
+    overflow-y: auto;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* 应用容器 */
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    min-height: 100vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 应用头部 */
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.app-header h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* 主内容区域 */
+.app-main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 词库选择 */
+.library-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.library-selector label {
+    font-weight: 500;
+    color: #555;
+}
+
+.library-selector select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.library-selector select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+/* 模式切换 */
+.mode-switcher {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.mode-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* 单词显示区域 */
+.word-display {
+    text-align: center;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.word-index {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.word {
+    font-size: 36px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.phonetic {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.meaning {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* 输入反馈区域 */
+.input-feedback {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    min-height: 60px;
+    align-items: center;
+}
+
+.letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.letter.correct {
+    background-color: #27ae60;
+    color: white;
+    border-color: #27ae60;
+    animation: pulse 0.5s ease;
+}
+
+.letter.incorrect {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+    animation: shake 0.5s ease;
+}
+
+.letter.empty {
+    background-color: transparent;
+    color: #333;
+    border-color: #ddd;
+}
+
+/* 控制按钮 */
+.control-buttons {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.control-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.control-buttons button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+}
+
+.control-buttons button:active {
+    transform: translateY(0);
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    /* 全局样式 */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* 应用容器 */
+    .app-container {
+        padding: 15px;
+        margin: 0;
+        min-height: 100vh;
+        box-shadow: none;
+    }
+    
+    /* 标题 */
+    .app-header {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .app-header h1 {
+        font-size: 22px;
+        text-align: center;
+        color: #3498db;
+        font-weight: 600;
+    }
+    
+    /* 词库选择 */
+    .library-selector {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+    
+    .library-selector label {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: #495057;
+    }
+    
+    .library-selector select {
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid #ced4da;
+        border-radius: 8px;
+        background-color: white;
+    }
+    
+    /* 模式切换 */
+    .mode-switcher {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+    
+    .mode-btn {
+        padding: 15px;
+        font-size: 17px;
+        font-weight: 500;
+        border-radius: 8px;
+        border: 2px solid #ced4da;
+        transition: all 0.3s ease;
+    }
+    
+    .mode-btn.active {
+        background-color: #3498db;
+        color: white;
+        border-color: #3498db;
+    }
+    
+    /* 单词显示区域 */
+    .word-display {
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        text-align: center;
+    }
+    
+    .word-index {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 15px;
+        text-align: right;
+    }
+    
+    .word {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+    
+    .phonetic {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+    
+    .meaning {
+        font-size: 17px;
+        color: #495057;
+        line-height: 1.6;
+        padding: 0 10px;
+    }
+    
+    /* 输入反馈区域 */
+    .input-feedback {
+        gap: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        min-height: 80px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .letter {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: 500;
+        border: 2px solid #ced4da;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .letter.correct {
+        background-color: #27ae60;
+        color: white;
+        border-color: #27ae60;
+        animation: pulse 0.5s ease;
+    }
+    
+    .letter.incorrect {
+        background-color: #e74c3c;
+        color: white;
+        border-color: #e74c3c;
+        animation: shake 0.5s ease;
+    }
+    
+    /* 提示信息区域 */
+    .message {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+    }
+    
+    /* 控制按钮 */
+    .control-buttons {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+    
+    .control-buttons button {
+        padding: 15px;
+        font-size: 17px;
+        font-weight: 500;
+        border: 2px solid #ced4da;
+        border-radius: 8px;
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .control-buttons button:hover {
+        background-color: #e9ecef;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 弹窗 */
+    .modal-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    
+    .all-words-modal {
+        width: 95%;
+        max-width: 95%;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-header {
+        padding: 20px;
+        border-bottom: 2px solid #e9ecef;
+        border-radius: 12px 12px 0 0;
+        background-color: #f8f9fa;
+    }
+    
+    .modal-header h2 {
+        font-size: 19px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    
+    .close-btn {
+        font-size: 28px;
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .modal-body {
+        padding: 20px;
+        max-height: calc(90vh - 90px);
+        overflow-y: auto;
+    }
+    
+    /* 单词列表 */
+    .all-words-list {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        background-color: white;
+    }
+    
+    .word-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 18px;
+        border-bottom: 1px solid #e9ecef;
+        transition: background-color 0.2s ease;
+    }
+    
+    .word-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .word-item:last-child {
+        border-bottom: none;
+    }
+    
+    .word-item .word-index {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 4px;
+        font-weight: 500;
+    }
+    
+    .word-item .word {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2c3e50;
+        min-width: auto;
+        margin-bottom: 0;
+    }
+    
+    .word-item .phonetic {
+        font-size: 14px;
+        color: #6c757d;
+        min-width: auto;
+        margin-bottom: 0;
+    }
+    
+    .word-item .meaning {
+        font-size: 16px;
+        color: #495057;
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    /* 分页控制 */
+    .pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+    
+    .page-size-selector {
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .page-size-selector label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #495057;
+    }
+    
+    .page-size-selector select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border: 2px solid #ced4da;
+        border-radius: 6px;
+        background-color: white;
+    }
+    
+    .page-navigation {
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .page-info {
+        font-size: 15px;
+        color: #495057;
+        font-weight: 500;
+        min-width: 140px;
+    }
+    
+    .page-navigation button {
+        padding: 10px 16px;
+        font-size: 15px;
+        font-weight: 500;
+        border: 2px solid #ced4da;
+        border-radius: 6px;
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .page-navigation button:hover:not(:disabled) {
+        background-color: #e9ecef;
+        transform: translateY(-1px);
+    }
+    
+    .page-navigation button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    /* 滚动条样式 */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1a1;
+    }
+    
+    /* 触摸反馈 */
+    button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* 确保输入元素在移动设备上有合适的大小 */
+    input, select, textarea {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
+
+/* 提示信息区域 */
+.message {
+    text-align: center;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.message.show {
+    opacity: 1;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* 输入焦点效果 */
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+
+
+.page-size-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-size-selector label {
+    font-size: 14px;
+    color: #555;
+}
+
+.page-size-selector select {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-info {
+    font-size: 14px;
+    color: #555;
+    min-width: 120px;
+    text-align: center;
+}
+
+.all-words-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.word-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.word-item:hover {
+    background-color: #f0f0f0;
+}
+
+.word-item .word-index {
+    font-size: 14px;
+    color: #7f8c8d;
+    min-width: 40px;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.word-item .word {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 120px;
+    margin-right: 15px;
+}
+
+.word-item .phonetic {
+    font-size: 14px;
+    color: #7f8c8d;
+    min-width: 120px;
+    margin-right: 15px;
+}
+
+.word-item .meaning {
+    font-size: 14px;
+    color: #555;
+    flex: 1;
+}
+
+/* 按钮禁用状态 */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+button:disabled:hover {
+    background-color: white;
+}
